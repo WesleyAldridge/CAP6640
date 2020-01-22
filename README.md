@@ -8,3 +8,11 @@ Our proposal is to build a chat bot to detect hate speech in an arbitrary chat s
 ## Proposal Document
 
 - LaTeX and PDF on folder [./proposal/](./proposal/) 
+
+## Useful links
+
+Here is the dataset from the paper if anyone wants to work on it:
+https://github.com/ZeerakW/hatespeech
+
+Here is a notebook to get started with NLP
+https://www.kaggle.com/philculliton/nlp-getting-started-tutorial
