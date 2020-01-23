@@ -70,11 +70,12 @@ https://homes.cs.washington.edu/~msap/pdfs/sap2019risk.pdf
 
 
 \section{How to Train Your Dragon}\label{sec:design}
+We want to use the best/most robust Twitter hate speech dataset from these sources \cite{Kaggle}\cite{HateSpeech} to train a neural network to detect hate speech. We then want to use this neural network to create a server bot for Discord that reads user messages and detects hate speech in real time and alerts the mods of the Discord server.
 \color{red}Here should be the actual proposal. What methods are you proposing? Describe the method you will use in designing your training method for your dragons. Relate to the problem statement. The description should be specific so that reproduction of the training method you used for your dragon are reproducible. Avoid copying others' work and others' style, and be creative.
 \color{black}
 
 \section{Evaluation}\label{sec:evaluation}
-
+A subset of the data (which is over 43,000 data points) will be set aside to be used as the test dataset. The test dataset will not be used for training and will only be used for testing, to avoid overfitting to the test data.
 \color{red}In this section, you want to describe two things: the data that you will use for evaluating the method against the problem stated above, and the results. As for data, describe your source of dragons, in as much details as needed, but not too much that I won't have the time to read. Be realistic.
 
 Here, I know that you won't have results, so don't worry. Describe to me the evaluation metrics that you will use for evaluating the approach on the dataset above. Describe concisely the steps you propose to use for evaluation against those methods/metrics. The description should be intended for the non-expert so that she is able to reproduce the results of your work. 
@@ -90,14 +91,16 @@ Also you want to tell me what are the risks associated with the project, and how
 \color{black}
 
 \section{Plan and Roles of Collaborators}
+
+Wesley will work on creating the neural network and training it with the hate speech data.
+\{Someone\} will work on using the neural network to create the Discord bot.
 \color{red}Divide your project into components, and tell me who is going to work on what, how much time each will work on each item. Have a timeline for the project. Tasks may include coding, testing, evaluation and analysis, write-up, presentation, etc.
 \color{black}
 
-\section{References}\label{sec:conclusion}
-\color{red}This space would be your chance to list the resources you used for the proposal.
+
 \color{black}
 \bibliographystyle{ieeetr}
 \bibliography{bib}
-
+\color{red}This space would be your chance to list the resources you used for the proposal.
 
 \end{document}
