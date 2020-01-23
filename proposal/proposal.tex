@@ -25,10 +25,7 @@
 \usepackage{verbatim}
 \begin{document}
 
-
-
 \title{Proposal: To Create a Chatbot for Detecting Hate Speech}
-
 
 \author{Wesley Aldridge\\ waldridge@knights.ucf.edu \and Miles C. Crowe  \\ miles.crowe@knights.ucf.edu \and Mauricio De Abreu\\ mabreu@knights.ucf.edu}
 
@@ -36,46 +33,43 @@
 
 
 \section{Motivation \& Problem Statement}\label{sec:motivation}
-Hate speech is defined broadly as aggressive language targeted at a person for attributes typically beyond their control.  Traits such as nationality, gender, race, sexual preference or disability are popular targets of hate speech[*].  Aggression towards the victim may manifest as insults, personal attacks or even threats.  As online communication between people is becoming more commonplace, exposure to hate speech is almost certain to reach more people.  Unfortunate as it is, this allows the spread of underlying beliefs that contribute to such behavior.
 
-This project aims to curtail the spread of such speech by detecting hateful dialog and providing an alert mechanism to raise events for handling the occurrence automatically as it happens.  Clearly stated, the chat bot would be a silent participant in a chat, regardless of the number of participants, which would monitor the text exchanges.  When hate speech is detected, the event would be passed to a host framework or external agent to handle the event.
+Hate speech is defined broadly as aggressive language targeted at a person for attributes typically beyond their control.  Traits such as nationality, gender, race, sexual preference or disability are popular targets of hate speech\cite{Dictionary.com}.  Aggression towards the victim may manifest as insults, personal attacks or even threats.  As online communication between people is becoming more commonplace, exposure to hate speech is almost certain to reach more people.  Unfortunate as it is, this allows the spread of underlying beliefs that contribute to such behavior.
 
-
-https://www.dictionary.com/browse/hate-speech
+The motivation for this project is rooted in the desire to curtail the spread of hateful language.  There are countless paths for hate speech to spread.  Providing a human intervention is infeasible given the amount of communication  that occurs over the internet.  Naturally, this presents an excellent opportunity to contribute an automated approach to detecting and flagging hate speech by utilizing NLP in real time.
 
 \section{Related Work}\label{sec:related}
-At this stage, you don't want to provide a comprehensive list of related work, but rather you want to consider this as a part in which you will provide a list of the resources that will be used to assist you conducting the project. Find out some of the related work that would be relevant to this project, and summarize how similar or different your work to them is. Even better, highlight in broad terms what would the $\delta$ you think you will achieve by this magnificent work be. 
-
-
+\color{red}At this stage, you don't want to provide a comprehensive list of related work, but rather you want to consider this as a part in which you will provide a list of the resources that will be used to assist you conducting the project. Find out some of the related work that would be relevant to this project, and summarize how similar or different your work to them is. Even better, highlight in broad terms what would the $\delta$ you think you will achieve by this magnificent work be. 
+\color{black}
 
 Challenge 1
 
 https://homes.cs.washington.edu/~msap/pdfs/sap2019risk.pdf
 
 
-\section{How to Train Your Dragon}\label{sec:design}
-Here should be the actual proposal. What methods are you proposing? Describe the method you will use in designing your training method for your dragons. Relate to the problem statement. The description should be specific so that reproduction of the training method you used for your dragon are reproducible. Avoid copying others' work and others' style, and be creative. 
 
-\section{Evaluation}\label{sec:evaluation}
+\section{Stopping the Spread}\label{sec:design}
+This project aims to curtail the spread of such speech by detecting hateful dialog and providing an alert mechanism to raise events for handling the occurrence automatically as it happens.  Clearly stated, the chat bot would be a silent participant in a chat, regardless of the number of participants, which would monitor the text exchanges.  When hate speech is detected, the event would be passed to a host framework or external agent to handle the event.
 
-In this section, you want to describe two things: the data that you will use for evaluating the method against the problem stated above, and the results. As for data, describe your source of dragons, in as much details as needed, but not too much that I won't have the time to read. Be realistic. 
+A simple implementation of this would be a chat bot, connected to a Discord server which is trained utilizing a robust hate speech data set from these sources: \cite{Kaggle}\cite{HateSpeech}. A neural network would be trained to detect hate speech. This neural network would be the critical part of the chat bot which would read user messages and detect hate speech in real time, and alert the moderators and admins of the Discord server.
 
-Here, I know that you won't have results, so don't worry. Describe to me the evaluation metrics that you will use for evaluating the approach on the dataset above. Describe concisely the steps you propose to use for evaluation against those methods/metrics. The description should be intended for the non-expert so that she is able to reproduce the results of your work. 
+\color{black}
 
-A bonus would be if you could propose to compare your work against a baseline. 
 
 \section{Expected outcomes and risk management}
 
-Here is your chance to tell me what you expect of outcomes. 
+As in most software projects, expectations will need to be curtailed and priorities need to be established.  At the bare minimum, this project should yield a simple input/output text classifier that is accurate with meeting the expectation of identifying hate speech.  Formally stated, this implies that core functionality should be established prior to moving towards the novel aspects such as portability and integration with external platforms.  This can be realized though a simple design that exposes only the necessary API to validate and test the outcome of the core goal.  Once this goal is achieved, a narrow set of integration targets can be established for demonstration purposes.
 
-Also you want to tell me what are the risks associated with the project, and how you plan to deal with them. 
+In terms of the main goal, there is risk of biases and over fitting of the training data.  Over-fitting errors will need to be carefully analyzed and bias will need to be mitigated with tools we will discover later in this course.
+
+Another risk would be training data mismatch with regards to the platform.  For example, users in Discord are allowed 2000 characters vs 280 characters for a Tweet on Twitter.  Size constraints may dramatically affect how hate speech is formulated due to the compression of ideas on platforms that severely restrict text lengths.  Careful validation can easily address this by restricting the test data to mimic similar sizes to that of the training data.
+
+Lastly, temporal changes in hate speech may present classification errors as slang and dialect may change over time.  This risk will have to be accepted unless fresh and up to date training data becomes immediately available.
+\color{black}
 
 \section{Plan and Roles of Collaborators}
-Divide your project into components, and tell me who is going to work on what, how much time each will work on each item. Have a timeline for the project. Tasks may include coding, testing, evaluation and analysis, write-up, presentation, etc. 
-
-
-\section{References}\label{sec:conclusion}
-This space would be your chance to list the resources you used for the proposal. 
+\color{red}Divide your project into components, and tell me who is going to work on what, how much time each will work on each item. Have a timeline for the project. Tasks may include coding, testing, evaluation and analysis, write-up, presentation, etc. 
+\color{black}
 
 \bibliographystyle{ieeetr}
 \bibliography{bib}
