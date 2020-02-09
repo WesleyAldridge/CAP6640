@@ -133,3 +133,5 @@ proposal.synctex.gz
 proposal.out
 proposal.blg
 .idea
+discord-interface/js/bot/node_modules
+package-lock.json

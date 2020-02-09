@@ -19,3 +19,6 @@ Each bot gets a token.  Store this token locally (DO NOT PUSH TO GIT).
 main.py accepts a path to a file containing the token and will start the bot.
 
 
+### Node Bot 
+
+If you like nodejs you might want to check the node bot [here](./js/bot/README.md)
