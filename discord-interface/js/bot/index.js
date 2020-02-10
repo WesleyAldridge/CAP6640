@@ -13,6 +13,16 @@ bot.on('message', msg => {
     if (msg.content === 'Hate') {
         msg.reply('Please be kind!');
     }
+    if (msg.content === 'You\'re not cool') {
+        msg.reply( 'That\'s not cool');
+        if (!msg.member.kickable) {
+            return msg.reply(`I wish I could kick you!`)
+        }
+        return msg.member
+            .kick()
+            .then(() => msg.reply(`${member.user.tag} was kicked.`))
+            .catch(error => msg.reply(`Sorry, an error occured.`))
+    }
     if (msg.content.startsWith('!kick')) {
         const member = msg.mentions.members.first()
 
@@ -35,7 +45,7 @@ bot.on('message', msg => {
 
 bot.on('guildMemberAdd', member => {
     member.send(
-        `Welcome on the server! Please be aware that we won't hate speech or harassment. Have fun 😀`
+        `Welcome on the server! Please be aware that we won't tolerate hate speech or harassment. Have fun 😀`
     );
 });
 
