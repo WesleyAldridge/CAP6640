@@ -69,6 +69,16 @@ Everyone will work on the write-up and presentation.
 
 For the first three weeks, beginning upon approval of this proposal, the main focus will be on gathering training data, designing and coding the framework and resolving architectural challenges.  The next four weeks will consist of building the neural net, training, testing and optimization.  The final three weeks, or remaining time to completion will focus on integration with chat bot client, analysis of hate speech detection and writing of the report and presentation.
 
+\section{Progress as of 3/3/2020}
+
+Wesley has accomplished preliminary work on building an initial neural net and some training.  Results from the neural net have been inconclusive as of yet.  This is due to the classification of the training data.  The training data is not classified into HATE/NOT HATE, rather is it scaled from normal speech through various levels of offensive language to various levels of hate speech.
+
+Miles has downloaded the entire data set of hate speech vocabulary from hatebase.org.  This vocabulary can be used to annotate speech as containing hate speech indicators.  Miles also created a Python based Discord bot that is a member of our group discord.  Design of the API therein to mesh the Python bot to Wesley's classification system is underway.
+
+Mauricio has created a NodeJS implementation of a Discord bot in parallel to the work that Miles has accomplished.  Mauricio was able to complete some rudimentary behaviors such as warning, kicking, etc.  This affords the project flexibility if we want to switch to a NodeJS implementation.
+
+Challenges moving forward will always be time availability and lack of training data.  Each member will continue to gather more examples of Hate Speech so that a more robust classifier will ultimately be created.  
+
 \bibliographystyle{ieeetr}
 \bibliography{bib}
 
