@@ -29,10 +29,19 @@
 
 \maketitle
 
+\section{Abstract}
+Hate speech represents the uglier side of humanity, often amplified through the anonymity of the internet and spread easily by the countless facilities available through the internet.  One does not need advanced knowledge to post a tweet or create hateful content on social media.  The task of detecting hate speech manually or relying on user reporting is subjective and time consuming.  This project aims to utilize a neural net solution to empower an automated agent to respond to hate speech in real time.  Understanding that hate speech itself is constantly evolving, both creatively and deceptively, we can never expect a perfect solution.  Our results can only be compared and contrasted with other work done in this area.
+
 \section{Motivation \& Problem Statement}\label{sec:motivation}
 Hate speech is defined broadly as aggressive language targeted at a person for attributes typically beyond their control.  Traits such as nationality, gender, race, sexual preference or disability are popular targets of hate speech\cite{Dictionary.com}.  Aggression towards the victim may manifest as insults, personal attacks or even threats.  As online communication between people is becoming more commonplace, exposure to hate speech is almost certain to reach more people.  Unfortunate as it is, this allows the spread of underlying beliefs that contribute to such behavior.
 
-The motivation for this project is rooted in the desire to curtail the spread of hateful language.  There are countless paths for hate speech to spread.  Providing a human intervention is infeasible given the amount of communication  that occurs over the internet.  Naturally, this presents an excellent opportunity to contribute an automated approach to detecting and flagging hate speech by utilizing NLP in real time.
+The motivation for this project is rooted in the desire to curtail the spread of hate speech.  This is truly a difficult task when considering the various reasons that hate speech occurs.  People are emotional creatures and situational hate speech can be done in fits of rage or intense feelings of persecution.  An easy example could follow an online gaming session with the loser declaring \textit{"I f*cking hate you, you ..."}.  Clearly the hateful intention is declared explicitly and whatever follows will be part of this hateful rant.  
+
+There are less explicit examples where perhaps the person is trying to be edgy, or conceal the hateful intent of the text/speech.  For example, one could state \textit{"he is queer"}.  Under the correct context, it could simply imply a particular male is a strange character.  Whereas someone could say \textit{"he is a queer"}.  The simple addition of the determiner to the sentence changes the nuance of the word \textit{"queer"}.  The latter now is pointed towards the male subject's sexual orientation, and as such may certainly be considered hate speech.
+
+Examples can contain geographic context.  For instance, \textit{"smoke a fag"} in the United States carries a completely different meaning than the same exact statement in Great Britain.  The former implies using a firearm to attempt a murder upon a person that identifies as homosexual whereas the latter implies smoking a cigarette.  While geography can be disseminated from tweets, this will be ignored in this project and the solution will be fit to the labels provided in the training data.
+
+Overall, the motivation is to provide a system capable of making small portions of the internet free of hateful speech.  This is not aimed at taking a shot at free speech, rather there should at a minimum be spaces where children and their parents may feel safer knowing that hate speech will not be tolerated and handled in real time.  False positive are inevitable, but an appeals process to mitigate the consequences of false positives will be far smaller than the task of analyzing all content for hate speech.
 
 \section{Related Work}\label{sec:related}
 
