@@ -60,17 +60,39 @@ Starting from their data set, as our goal is slightly different from them, and f
 From the total labeled data set of about 25K tweets we used 20,000 as our training set and reserved around 5,000 as our validation data set.
 
 \subsection{Pre-processing}
-Our pre-processing basically made all text lowercase, removed the punctuation and stemmed the data. The stemmer reduces key words to the same stem without removing relevant information, for instance \textit{days} and \textit{day} stem to \textit{day}.We also padded the tweets with 0.
-We identified 40,817 distinct words in the tweets and used 50k as our vocabulary size. 
-The maximum padded input size found on the data set was 33. 
+Our pre-processing basically made all text lowercase, removed the punctuation and stemmed the data. 
+
+The stemmer reduces key words to the same stem without removing relevant information, for instance \textit{days} and \textit{day} stem to \textit{day}.We also padded the tweets with 0.
+
+We identified 40,817 distinct words in the tweets before stemmer.so we set our one-hot vectors to use 50,000 dimensions for our first model. 
+
+After the stemmer  36,280 distinct words were identified. We then set our vocabulary size as 36,300 for generating the one-hot vectors.
+
+The maximum input size found on the input data set was 33 words and so we padded all inputs to size 33. 
 
 \subsection{Embeddings}
-We used a dense embeddings layer to get 512 dimensional dense vectors from each tweet input value ( original dimensionality was 30 (word length) x 50,000 (dimension for one-hot vector for the vocabulary size). 
+For our first ANN model we used a dense embeddings layer to get 512 dimensional dense vectors from each tweet input value ( original dimensionality was 33 (word length) x 50,000 (dimension for one-hot vector for the vocabulary size). 
+
+For the second model we used 128 as the embeddings dimension. So the  embedding layer reduced the dimensionality of the input considerably from the 36,800 original dimensional for one-hot vectors.
 
 \subsection{Network Architecture}
-Our first classifier attempt was a seven layer deep ANN with decreasing number of nodes for each subsequent layer starting from 512 nodes on the first dense layer and then reducing to 256, 128, 64, 32, 16 and finally 1 node for the output layer. The six first layers uses the relu activation function while the output layer uses the sigmoid activation function. 
-Our second approach uses CNN and LSTM. The full architecture includes a dropout layer to address over-fitting, followed by a 1 dimensional CNN block (conv 1d and max pool ) for extracting features from the tweets, followed by a LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. 
+Our first classifier attempt which is depicted in figure \ref{fig:model ANN}, is a seven layer deep ANN with decreasing number of nodes for each subsequent layer starting from 512 nodes on the first dense layer and then reducing to 256, 128, 64, 32, 16 and finally 1 node for the output layer. The six first layers uses the relu activation function while the output layer uses the sigmoid activation function.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{"model ANN"}
+	\caption{Architecture 1 (ANN)}
+	\label{fig:model ANN}
+\end{figure}
+
+Our second approach uses CNN and LSTM. Its summarized representation is shown in figure \ref{fig:model CNN LSTM}. The full architecture includes a dropout layer to address over-fitting, followed by a 1 dimensional CNN block (conv 1d and max pool ) for extracting features from the tweets, followed by a LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. 
 We will test a third approach based on RNNs for the classifier and will be appropriate for any size of input.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{"model CNN LSTM"}
+	\caption{Architecture 2 (CNN and LSTM)}
+	\label{fig:model CNN LSTM}
+\end{figure}
 
 \subsection{Optimizing}
 We trained our network optimizing for accuracy using the binary cross-entropy loss function through 10 epochs with batch size of 32 points for the first network architecture. For the CNN and LSTM classifier architecture we used only 2 epochs for preventing over-fitting 
