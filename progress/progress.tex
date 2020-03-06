@@ -141,7 +141,7 @@ For the first three weeks, the main focus was on gathering training data, design
 
 \section{Progress as of 3/5/2020}
 
-Wesley has acquired the data sets from Davidson et al. and Ribeiro et al. and Analytics Vidhya and pre-processed them. He split the data sets into a training set and test set and created the initial network architecture and performed training on it.
+Wesley has acquired the data sets from Davidson et al. and Ribeiro et al. and Analytics Vidhya and pre-processed them. He split the data set from Davidson et al. into a training set and test set and created the initial lexicon and network architecture and performed training on it.
 
 Mauricio has performed a training task using the same data set but with a network structure based on a 1-dimensional convolutional network block followed by a LSTM block. That network outperformed the first vanilla ANN architecture we have tested.
 
@@ -151,13 +151,15 @@ Mauricio has created a NodeJS implementation of a Discord bot in parallel to the
 
 All team members participated on discussions about how the work would progress including brainstorms around how we would design our classifier architecture, and how we would test and evaluate it, and the best selection of annotated data to use, etc. Also all team members have participated on writing out this report. 
 
-Challenges moving forward will always be time availability and lack of training data.  Each member will continue to gather more examples of Hate Speech so that a more robust classifier will ultimately be created.  
 
 \section{Next Steps}
 
-Our current classifier achieves an 81-82\% accuracy rating on our current test data set. We want to improve this to achieve a minimum of 90\%. To do this we will continue to compile any tweet data that we can find on the web that is labeled to detect hate speech, so that we can have more data for our model to train on. If we need to, we can hand-classify a few hundred or thousand tweets ourselves to create our own data. 
+Our current classifier achieves an 81-82\% accuracy rating on our current test data set. We want to improve this to achieve a minimum of 90\%. To do this we will continue to compile any tweet data that we can find on the web that is labeled to detect hate speech, so that we can have more data for our model to train on. If we need to, we can hand-classify a few hundred or thousand tweets ourselves to create our own data. But first we will start by adding the Analytics Vidhya data set that we found to the existing Davidson et al. data set.
+If necessary, we will brainstorm ways to improve upon our current model if accuracy does not improve from more data alone.
 
 While we continue to improve upon the model's accuracy, we will export the current model to be integrated into the Discord chat bot we have established. We need to program the bot to use the classifier to read Discord messages and classify them as hate speech or not hate speech. We also need to program the bot to ignore messages labeled as not hate speech and to alert the moderators and/or kick or warn the author if a message labeled hate speech is encountered.
+
+Challenges moving forward will always be time availability and lack of training data.  Each member will continue to gather more examples of hate speech so that a more robust classifier will ultimately be created.  
 
 \bibliographystyle{ieeetr}
 \bibliography{bib}
