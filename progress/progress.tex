@@ -21,6 +21,9 @@
 
 \usepackage{fancyvrb}
 \usepackage{verbatim}
+
+\pagenumbering{arabic}
+
 \begin{document}
 
 \title{Milestone: To Create a Chatbot for Detecting Hate Speech}
@@ -30,7 +33,7 @@
 \maketitle
 
 \section{Abstract}
-Hate speech represents the uglier side of humanity, often amplified through the anonymity of the internet and spread easily by the countless facilities available through the internet.  One does not need advanced knowledge to post a Tweet or create hateful content on social media.  The task of detecting hate speech manually or relying on user reporting is subjective and time consuming.  This project aims to utilize a neural net solution to empower an automated agent to respond to hate speech in real time.  Understanding that hate speech itself is constantly evolving, both creatively and deceptively, we can never expect a perfect solution.  Our results can only be compared and contrasted with other work done in this area.
+Hate speech represents the uglier side of humanity, often amplified through the anonymity of the internet and spread easily by the countless facilities available through the internet.  One does not need advanced knowledge to post a tweet or create hateful content on social media.  The task of detecting hate speech manually or relying on user reporting is subjective and time consuming.  This project aims to utilize a neural net solution to empower an automated agent to respond to hate speech in real time.  Understanding that hate speech itself is constantly evolving, both creatively and deceptively, we can never expect a perfect solution.  Our results can only be compared and contrasted with other work done in this area.
 
 \section{Motivation \& Problem Statement}\label{sec:motivation}
 Hate speech is defined broadly as aggressive language targeted at a person for attributes typically beyond their control.  Traits such as nationality, gender, race, sexual orientation or disability are popular targets of hate speech\cite{Dictionary.com}.  Aggression towards the victim may manifest as insults, personal attacks or even threats.  As online communication between people has become more commonplace, exposure to hate speech is almost certain to reach more people.  Unfortunate as it is, this allows the spread of underlying beliefs that contribute to such behavior.
@@ -39,7 +42,7 @@ The motivation for this project is rooted in the desire to curtail the spread of
 
 There are less explicit examples where perhaps the person is trying to be humorous or sarcastic, or conceal the hateful intent of the text/speech.  For example, one could state \textit{"he is queer"}.  Under one context and definition, the statement could mean that the particular male is strange or unusual.  In another context, the statement could mean that the male is a member of the LGBT community. The statement could also be phrased as \textit{"he is a queer"}.  The simple addition of the article to the sentence changes the nuance of the word \textit{"queer"}.  The latter now is pointed towards the male subject's sexual orientation, and coupled with the objectifying phrasing could be the start of hate speech.
 
-Examples can also contain geographic context.  For instance, \textit{"smoke a fag"} in the United States carries a completely different meaning than the same exact statement in Great Britain.  The former implies using a firearm to attempt a murder upon a homosexual male, whereas the latter implies smoking a cigarette.  While geography can be disseminated from Tweets, this will be ignored in this project and the solution will be fit to the labels provided in the training data.
+Examples can also contain geographic context.  For instance, \textit{"smoke a fag"} in the United States carries a completely different meaning than the same exact statement in Great Britain.  The former implies using a firearm to attempt a murder upon a homosexual male, whereas the latter implies smoking a cigarette.  While geography can be disseminated from tweets, this will be ignored in this project and the solution will be fit to the labels provided in the training data.
 
 Overall, the motivation is to provide a system capable of making small portions of the internet free of hateful speech.  This is not aimed at taking a shot at free speech, rather there should at a minimum be spaces where children and their parents may feel safer knowing that hate speech will not be tolerated and handled in real time.  False positives are inevitable, but an appeals process to mitigate the consequences of false positives will be far smaller than the task of analyzing all content for hate speech.
 
@@ -47,9 +50,9 @@ Overall, the motivation is to provide a system capable of making small portions 
 
 Hate speech has earned enough interest to inspire governments into getting involved\cite{Davidsonetal.} by passing laws explicitly prohibiting hate speech.  Given this, many have examined various methods for hate speech detection.
 
-Manoel Horta Ribeiro, et al.\cite{HatefulUsersTwitter}\cite{ribeiro2017like} used a Twitter hate speech dataset to characterize Twitter users as either hateful or not, in order to analyze patterns and trends among the users labeled as hateful. Instead we will use this dataset, among others, to train a neural network to detect hate speech, and we will use this neural network to create a Discord realtime hate speech detection bot.
+Manoel Horta Ribeiro, et al.\cite{HatefulUsersTwitter}\cite{ribeiro2017like} used a Twitter hate speech data set to characterize Twitter users themselves (rather than their individual tweets) as either hateful or not, based on manually reading their tweets, in order to analyze patterns and trends among the users labeled as hateful, such as who they follow and who follows them, to see if perhaps hateful users are connected to one another in a network or if they are isolated. This is similar to our work in that it deals with hate speech and Twitter and analyzing tweets, but their goal was to determine if individual users were hateful and if hateful users had hateful networks, whereas our goal is to classify individual tweets as either hate speech or not. However we can utilize their data set to help us accomplish our goal of training a neural network to detect hate speech so that we can create a Discord realtime hate speech detection bot.
 
-Davidson et al. went further into separating offensive speech from hate speech.  Their approach used hate speech compiled by Hatebase.org, consisting of a lexicon of both words and phrases, identified by internet users.  Following their lead, we intend to use Hatebase.org's academia API to obtain modern hate speech examples.  This is important as a major shortcoming noted by MacAveney et al.\cite{MacAvaneyetal.} is those who spread hate speech are well aware that their views and texts are being suppressed and removed, and continue to evolve to evade detection.
+Davidson et al. created a data set that includes both offensive language that is not hate speech as well as hate speech. Their intention was to create a neural network that could differentiate between tweets that are merely offensive and tweets that are hateful. They used a hate speech lexicon compiled by Hatebase.org, consisting of both words and phrases, identified by internet users as hateful.  Following their lead, we intend to use Hatebase.org's academia API to obtain modern hate speech examples.  This is important as a major shortcoming noted by MacAveney et al.\cite{MacAvaneyetal.} is those who spread hate speech are well aware that their views and texts are being suppressed and removed, and continue to evolve to evade detection.
 
 Our work distinguish from the previous because we focus on online binary classification of hate speech tweaked for the Discord platform.  
 
@@ -64,23 +67,27 @@ We expect the classifier trained with Twitter data will be able to accurately cl
 In this section we describe our approach in detail by explaining each component of the machine learning pipeline as follows.
  
 \subsection{Training and Test Data}
-We used labeled data from  Davidson et al. work \cite{Davidsonetal.}. The work includes details about how that data set was built. We summarize here some key points. They began by using a lexicon compiled by Hatebase.org \cite{HaeBaseOrg}. That lexicon contains words and sentences that have been classified as hate speech by internet users. Then they used Twitter API to look for Tweets that contain terms from the lexicon. That search resulted in a collection of Tweets from about 33,000 different users. They downloaded all Tweets from those users' timelines (around 85 million Tweets) and randomly selected 25,000 Tweets containing terms from the lexicon. Those 25k tweeds were classified by human workers. They classified each Tweet as hate speech or not hate speech and also whether offensive or not offensive which is not currently relevant for the scope of our work. Workers were given specific instructions on how to classify including an explanation that the presence of offensive words is not necessarily an indication of hate speech, and also they were provided with not only the Tweets but also the context Tweets around them. Each Tweet was classified by at least 3 workers, and they kept in the data set only the Tweets in which the majority of the workers decided for the same class and discarded those with no majority decision.  That process resulted in a labeled data set of 24,802 Tweets.
-Starting from their data set, as our goal is slightly different from theirs, and for the sake of having more relevant data for our purpose,  we considered hate speech the Tweets which any worker classified as hate speech as opposed as the majority of the workers. 
-From the total labeled data set of about 25K Tweets we used 20,000 as our training set and reserved around 5,000 as our validation data set.
+So far we have used labeled data from Davidson et al. \cite{Davidsonetal.}, Analytics Vidhya \cite{vidhya}, and Ribeiro et al. \cite{ribeiro2017like}
+
+The Davidson et al. work includes details about how that data set was built. We summarize here some key points. They began by using a lexicon compiled by Hatebase.org \cite{HateBaseOrg}. That lexicon contains words and sentences that have been classified as hate speech by internet users. Then they used Twitter API to look for tweets that contain terms from the lexicon. That search resulted in a collection of tweets from about 33,000 different users. They downloaded all tweets from those users' timelines (around 85 million tweets) and randomly selected 25,000 tweets containing terms from the lexicon. Those 25k tweeds were classified by human workers. They classified each tweet as hate speech or not hate speech and also whether offensive or not offensive which is not currently relevant for the scope of our work. Workers were given specific instructions on how to classify including an explanation that the presence of offensive words is not necessarily an indication of hate speech, and also they were provided with not only the tweets but also the context tweets around them. Each tweet was classified by at least 3 workers, and they kept in the data set only the tweets in which the majority of the workers decided for the same class and discarded those with no majority decision.  That process resulted in a labeled data set of 24,802 tweets.
+Starting from their data set, as our goal is slightly different from theirs, and for the sake of having more relevant data for our purpose,  we considered hate speech the tweets which any worker classified as hate speech as opposed to the majority of the workers. 
+From the total labeled data set of about 25K tweets we used 20,000 as our training set and reserved around 5,000 as our validation data set.
+
+The Analytics Vidhya data set consists of a training set of 31,962 labeled tweets and a test set of 17,197 unlabeled tweets. The labeled training tweets are labeled as either 0 or 1, with 1 indicating that the tweet contains sexist or racist speech, and 0 meaning that it does not. As racist and sexist speech constitutes hate speech, we found this data highly relevant and useful to add to our compiled data set.
 
 \subsection{Pre-processing}
-The dataset we used labelled Tweets on a scale from 0 to 7, with 0 representing that zero of the seven original researchers thought a Tweet constituted hate speech, up to 7 representing that all seven researchers agreed that a Tweet was hate speech. We reclassified the data to represent a binary distinction, either hate speech or not hate speech, with anything originally labeled higher than a 0 as hate speech with the label of 1, and anything originally labeled as a 0 remained a 0, aka not hate speech. This left us with 4993 Tweets labelled as hate speech and 19790 Tweets labelled as not hate speech.
-We then transformed all of the text in the Tweets to lowercase to avoid redundancy in vocabulary based on capitalization. 
+The dataset we used labeled tweets on a scale from 0 to 7, with 0 representing that zero of the seven original researchers thought a tweet constituted hate speech, up to 7 representing that all seven researchers agreed that a tweet was hate speech. We reclassified the data to represent a binary distinction, either hate speech or not hate speech, with anything originally labeled higher than a 0 as hate speech with the label of 1, and anything originally labeled as a 0 remained a 0, aka not hate speech. This left us with 4993 tweets labeled as hate speech and 19790 tweets labeled as not hate speech.
+We then transformed all of the text in the tweets to lowercase to avoid redundancy in vocabulary based on capitalization. 
 Similarly we removed all punctuation and stemmed the data. The stemmer reduces key words to the same stem without removing relevant information, for instance \textit{days} and \textit{day} stem to \textit{day}.
-We also padded the Tweets with the character ``0" to keep them all the same length. 0 was chosen because it is a neutral word/character that has no known affiliation with hateful speech.
-We identified 40,817 distinct words in the Tweets (before stemmer) and used 50k as our vocabulary size for our first model.
+We also padded the tweets with the character ``0" to keep them all the same length. 0 was chosen because it is a neutral word/character that has no known affiliation with hateful speech.
+We identified 40,817 distinct words in the tweets (before stemmer) and used 50k as our vocabulary size for our first model.
 
 After the stemmer,  36,280 distinct words were identified. So for our second model we set our vocabulary size as 36,300 for generating the one-hot vectors.
 
 The maximum input size found on the input data set was 33 words, so we padded all inputs to size 33.
 
 \subsection{Embeddings}
-For our first ANN model, we used a dense embeddings layer to get 512 dimensional dense vectors from each Tweet input value ( original dimensionality was 33 (word length) x 50,000 (dimension for one-hot vector for the vocabulary size).
+For our first ANN model, we used a dense embeddings layer to get 512 dimensional dense vectors from each tweet input value ( original dimensionality was 33 (word length) x 50,000 (dimension for one-hot vector for the vocabulary size).
 
 For the second model we used 128 as the embeddings dimension. So the  embedding layer reduced the dimensionality of the input considerably from the 36,800 original dimensional for one-hot vectors.
 
@@ -94,9 +101,9 @@ Our first classifier attempt which is depicted in figure \ref{fig:model ANN}, is
 	\label{fig:model ANN}
 \end{figure}
 
-Our second approach uses CNN and LSTM. Its summarized representation is shown in figure \ref{fig:model CNN LSTM}. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the Tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function.
+Our second approach uses CNN and LSTM. Its summarized representation is shown in figure \ref{fig:model CNN LSTM}. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function.
 Our first classifier attempt was a seven layer deep ANN with decreasing number of nodes for each subsequent layer starting from 512 nodes on the first dense layer and then reducing to 256, 128, 64, 32, 16 and finally 1 node for the output layer. The six first layers uses the ReLU activation function while the output layer uses the sigmoid activation function.
-Our second approach uses CNN and LSTM. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the Tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. Current testing accuracy with second approach is 80.95\%.
+Our second approach uses CNN and LSTM. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. Current testing accuracy with second approach is 80.95\%.
 We will test a third approach based on RNNs for the classifier and will be appropriate for any size of input.
 \begin{figure}
 	\centering
@@ -115,7 +122,7 @@ As in most software projects, expectations will need to be curtailed and priorit
 
 In terms of the main goal, there is risk of biases and over fitting of the training data.  Over-fitting errors will need to be carefully analyzed and bias will need to be mitigated with tools we will discover later in this course.
 
-Another risk would be training data mismatch with regards to the platform.  For example, users in Discord are allowed 2000 characters for a message versus 280 characters for a Tweet on Twitter.  Size constraints may dramatically affect how hate speech is formulated due to the compression of ideas on platforms that severely restrict text lengths.  Careful validation can easily address this by restricting the test data to mimic similar sizes to that of the training data.
+Another risk would be training data mismatch with regards to the platform.  For example, users in Discord are allowed 2000 characters for a message versus 280 characters for a tweet on Twitter.  Size constraints may dramatically affect how hate speech is formulated due to the compression of ideas on platforms that severely restrict text lengths.  Careful validation can easily address this by restricting the test data to mimic similar sizes to that of the training data.
 
 Lastly, temporal changes in hate speech may present classification errors as slang and dialect may change over time.  This risk will have to be accepted unless fresh and up to date training data becomes immediately available.
 
@@ -133,7 +140,7 @@ For the first three weeks, the main focus was on gathering training data, design
 
 \section{Progress as of 3/5/2020}
 
-Wesley has acquired the data sets from Davidson et al. and Ribeiro et al. and pre-processed them. He split the data sets into a training set and test set and created the initial network architecture and performed training on it.
+Wesley has acquired the data sets from Davidson et al. and Ribeiro et al. and Analytics Vidhya and pre-processed them. He split the data sets into a training set and test set and created the initial network architecture and performed training on it.
 
 Mauricio has performed a training task using the same data set but with a network structure based on a 1-dimensional convolutional network block followed by a LSTM block. That network outperformed the first vanilla ANN architecture we have tested.
 
@@ -144,6 +151,12 @@ Mauricio has created a NodeJS implementation of a Discord bot in parallel to the
 All team members participated on discussions about how the work would progress including brainstorms around how we would design our classifier architecture, and how we would test and evaluate it, and the best selection of annotated data to use, etc. Also all team members have participated on writing out this report. 
 
 Challenges moving forward will always be time availability and lack of training data.  Each member will continue to gather more examples of Hate Speech so that a more robust classifier will ultimately be created.  
+
+\section{Next Steps}
+
+Our current classifier achieves an 81-82\% accuracy rating on our current test data set. We want to improve this to achieve a minimum of 90\%. To do this we will continue to compile any tweet data that we can find on the web that is labeled to detect hate speech, so that we can have more data for our model to train on. If we need to, we can hand-classify a few hundred or thousand tweets ourselves to create our own data. 
+
+While we continue to improve upon the model's accuracy, we will export the current model to be integrated into the Discord chat bot we have established. We need to program the bot to use the classifier to read Discord messages and classify them as hate speech or not hate speech. We also need to program the bot to ignore messages labeled as not hate speech and to alert the moderators and/or kick or warn the author if a message labeled hate speech is encountered.
 
 \bibliographystyle{ieeetr}
 \bibliography{bib}
