@@ -50,26 +50,26 @@ Overall, the motivation is to provide a system capable of making small portions 
 
 Hate speech has earned enough interest to inspire governments into getting involved\cite{Davidsonetal.} by passing laws explicitly prohibiting hate speech.  Given this, many have examined various methods for hate speech detection.
 
-Manoel Horta Ribeiro, et al.\cite{HatefulUsersTwitter}\cite{ribeiro2017like} used a Twitter hate speech data set to characterize Twitter users themselves (rather than their individual tweets) as either hateful or not, based on manually reading their tweets, in order to analyze patterns and trends among the users labeled as hateful, such as who they follow and who follows them, to see if perhaps hateful users are connected to one another in a network or if they are isolated. This is similar to our work in that it deals with hate speech and Twitter and analyzing tweets, but their goal was to determine if individual users were hateful and if hateful users had hateful networks, whereas our goal is to classify individual tweets as either hate speech or not. However we can utilize their data set to help us accomplish our goal of training a neural network to detect hate speech so that we can create a Discord realtime hate speech detection bot.
+Manoel Horta Ribeiro, et al.\cite{HatefulUsersTwitter}\cite{ribeiro2017like} used a Twitter hate speech data set to characterize Twitter users themselves (rather than their individual tweets) as either hateful or not, based on manually reading their tweets, in order to analyze patterns and trends among the users labeled as hateful, such as who they follow and who follows them, to see if perhaps hateful users are connected to one another in a network or if they are isolated. This is similar to our work in that it deals with hate speech and Twitter and analyzing tweets, but their goal was to determine if individual users were hateful and if hateful users had hateful networks, whereas our goal is to classify individual statements as either hate speech or not. We can utilize their data set to help us accomplish our goal of training a neural network to detect hate speech so that we can create a Discord real-time hate speech detection bot.
 
 Davidson et al. created a data set that includes both offensive language that is not hate speech as well as hate speech. Their intention was to create a neural network that could differentiate between tweets that are merely offensive and tweets that are hateful. They used a hate speech lexicon compiled by Hatebase.org, consisting of both words and phrases, identified by internet users as hateful.  Following their lead, we intend to use Hatebase.org's academia API to obtain modern hate speech examples.  This is important as a major shortcoming noted by MacAveney et al.\cite{MacAvaneyetal.} is those who spread hate speech are well aware that their views and texts are being suppressed and removed, and continue to evolve to evade detection.
 
-Our work distinguish from the previous because we focus on online binary classification of hate speech tweaked for the Discord platform.  
+Our work is differentiated from the previous approaches noted in this study given that we will focus on building an online binary classifier of hate speech rather than a multi-classifier.  We will demonstrate and test this classifier in a configuration that is tweaked for the Discord platform to allow for real time classification and recommendation.
 
 \section{Stopping the Spread}\label{sec:design}
 This project aims to curtail the spread of such speech by detecting hateful dialog and providing an alert mechanism to raise events for handling the occurrence automatically as it happens.  Clearly stated, the chat bot would be a silent participant in a chat, regardless of the number of participants, which would monitor the text exchanges.  When hate speech is detected, the event would be passed to a host framework or external agent to handle the event.
 
-A simple implementation of this would be a chat bot, connected to a Discord server which is trained utilizing a robust hate speech data set. A neural network would be trained to detect hate speech. This neural network would be the critical part of the chat bot which would read user messages and detect hate speech in real time, and either alert the moderators and admins of the Discord server or ( and more effectively ) actively kick out hate speech users from the monitored channels.
+A simple implementation of this would be a chat bot, connected to a Discord server which is trained utilizing a robust hate speech data set. A neural network would be trained to detect hate speech. This neural network would be the critical part of the chat bot which would read user messages and detect hate speech in real time, and either alert the moderators and admins of the Discord server or ( and more effectively ) actively kick out hate speech users from the monitored channels and or edit/remove the content altogether.
 
 \section{Approach}\label{sec:approach}
-Our solution is a binary classifier that predicts whether each Discord message is hate speech or not. The classifier was trained through supervised learning using publicly available labeled Twitter data that from Davidson et al. work \cite{Davidsonetal.}
+Our solution is a binary classifier that predicts whether each Discord message is hate speech or not. The classifier will be trained through supervised learning using publicly available labeled Twitter data from Davidson et al. work \cite{Davidsonetal.}
 We expect the classifier trained with Twitter data will be able to accurately classify Discord messages as their content are usually similar in length and language verbiage. 
 In this section we describe our approach in detail by explaining each component of the machine learning pipeline as follows.
  
 \subsection{Training and Test Data}
 So far we have used labeled data from Davidson et al. \cite{Davidsonetal.}, Analytics Vidhya \cite{vidhya}, and Ribeiro et al. \cite{ribeiro2017like}
 
-The Davidson et al. work includes details about how that data set was built. We summarize here some key points. They began by using a lexicon compiled by Hatebase.org \cite{HateBaseOrg}. That lexicon contains words and sentences that have been classified as hate speech by internet users. Then they used Twitter API to look for tweets that contain terms from the lexicon. That search resulted in a collection of tweets from about 33,000 different users. They downloaded all tweets from those users' timelines (around 85 million tweets) and randomly selected 25,000 tweets containing terms from the lexicon. Those 25k tweeds were classified by human workers. They classified each tweet as hate speech or not hate speech and also whether offensive or not offensive which is not currently relevant for the scope of our work. Workers were given specific instructions on how to classify including an explanation that the presence of offensive words is not necessarily an indication of hate speech, and also they were provided with not only the tweets but also the context tweets around them. Each tweet was classified by at least 3 workers, and they kept in the data set only the tweets in which the majority of the workers decided for the same class and discarded those with no majority decision.  That process resulted in a labeled data set of 24,802 tweets.
+The Davidson et al. work includes details about how that data set was built. We summarize here some key points. They began by using a lexicon compiled by Hatebase.org \cite{HateBaseOrg}. That lexicon contains words and sentences that have been classified as hate speech by internet users. Then they used Twitter API to look for tweets that contain terms from the lexicon. That search resulted in a collection of tweets from about 33,000 different users. They downloaded all tweets from those users' timelines (around 85 million tweets) and randomly selected 25,000 tweets containing terms from the lexicon. Those 25k tweeds were classified by human workers. They classified each tweet as hate speech or not hate speech and also whether offensive or not offensive which is not currently relevant for the scope of our work. Workers were given specific instructions on how to classify each tweet, including an explanation that the presence of offensive words is not necessarily an indication of hate speech, and also they were provided with not only the tweets but also the context tweets around them. Each tweet was classified by at least 3 workers, and they kept in the data set only the tweets in which the majority of the workers decided for the same class and discarded those with no majority decision.  That process resulted in a labeled data set of 24,802 tweets.
 Starting from their data set, as our goal is slightly different from theirs, and for the sake of having more relevant data for our purpose,  we considered hate speech the tweets which any worker classified as hate speech as opposed to the majority of the workers. 
 From the total labeled data set of about 25K tweets we used 20,000 as our training set and reserved around 5,000 as our validation data set.
 
@@ -85,10 +85,10 @@ The maximum tweet length found on the input data set was 33 words, so we padded 
 
 After pre-processing the data, we parsed the processed data to create a lexicon of unique words used in the data set. For our first model, which did not include a stemmer, we identified 40,817 distinct words in the tweets and used 50k as our vocabulary size for our model. After stemming the data, we found 36,280 distinct words. So for our second model, we set our vocabulary size as 36,300 for generating the one-hot vectors.
 
-We later found the Analytics Vidhya data set and are working to incorporate that tweet data into our current working data set. To do so we will process the data similar to how we did with the Davidson et al. data: by removing punctuation, transforming all characters to lowercase, stemming the words, etc. And we will add any new vocabulary from this data set into our existing lexicon.
+We later found the Analytics Vidhya data set and are working to incorporate that tweet data into our current working data set. To do so we will process the data similar to how we did with the Davidson et al. data: by removing punctuation, transforming all characters to lowercase, stemming the words, etc. We will then add any newly discovered vocabulary words from this data set into our existing lexicon.
 
 \subsection{Embeddings}
-For our first ANN model, we used a dense embeddings layer to get 512 dimensional dense vectors from each tweet input value ( original dimensionality was 33 (word length) x 50,000 (dimension for one-hot vector for the vocabulary size).
+For our first ANN model, we used a dense embeddings layer to get 512 dimensional dense vectors from each tweet input value (original dimensionality was 33).\\ (word length) x 50,000 (dimension for one-hot vector for the vocabulary size).
 
 For the second model we used 128 as the embeddings dimension. So the  embedding layer reduced the dimensionality of the input considerably from the 36,800 original dimensional for one-hot vectors.
 
@@ -102,9 +102,8 @@ Our first classifier attempt which is depicted in figure \ref{fig:model ANN}, is
 	\label{fig:model ANN}
 \end{figure}
 
-Our second approach uses CNN and LSTM. Its summarized representation is shown in figure \ref{fig:model CNN LSTM}. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function.
-Our first classifier attempt was a seven layer deep ANN with decreasing number of nodes for each subsequent layer starting from 512 nodes on the first dense layer and then reducing to 256, 128, 64, 32, 16 and finally 1 node for the output layer. The six first layers uses the ReLU activation function while the output layer uses the sigmoid activation function.
-Our second approach uses CNN and LSTM. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. Current testing accuracy with second approach is 80.95\%.
+Our second approach uses CNN and LSTM. Its summarized representation is shown in figure \ref{fig:model CNN LSTM}. The full architecture includes a dropout layer to address over-fitting, followed by a 1-dimensional CNN block (conv 1d and max pool) for extracting features from the tweets, followed by an LSTM and scoring layer block for the classifier. The output layer uses the sigmoid activation function. Current testing accuracy with second approach is 80.95\%.
+
 We will test a third approach based on RNNs for the classifier and will be appropriate for any size of input.
 \begin{figure}
 	\centering
@@ -113,7 +112,7 @@ We will test a third approach based on RNNs for the classifier and will be appro
 	\label{fig:model CNN LSTM}
 \end{figure}
 
-\subsection{Optimizing}
+\subsection{Optimization}
 We trained our network optimizing for accuracy using the binary cross-entropy loss function through 10 epochs with batch size of 32 points for the first network architecture. The resulting accuracy on the test data was 75\%. For the CNN and LSTM classifier architecture we used only 2 epochs for preventing over-fitting, and we received 80.95\% accuracy on the test data.
 
 
@@ -125,7 +124,7 @@ In terms of the main goal, there is risk of biases and over fitting of the train
 
 Another risk would be training data mismatch with regards to the platform.  For example, users in Discord are allowed 2000 characters for a message versus 280 characters for a tweet on Twitter.  Size constraints may dramatically affect how hate speech is formulated due to the compression of ideas on platforms that severely restrict text lengths.  Careful validation can easily address this by restricting the test data to mimic similar sizes to that of the training data.
 
-Lastly, temporal changes in hate speech may present classification errors as slang and dialect may change over time.  This risk will have to be accepted unless fresh and up to date training data becomes immediately available.
+Lastly, temporal changes in hate speech may present classification errors as slang and dialect may change over time.  This risk will have to be accepted unless fresh and up to date training data becomes immediately available.  For the duration of this project, we aim to continually monitor the available lexicons provided by Hatebase.org and any other fresh datasets that may appear during our work.
 
 \section{Plan and Roles of Collaborators}
 
@@ -148,7 +147,7 @@ For the initial phase, the main focus has been on gathering training data, desig
 
 The remaining time to completion will focus on integrating the classifier with the chat bot client and testing the chat bot classifier on Discord messages to see how the classifier trained on Twitter data holds up to classifying Discord data. Additionally we will spend time writing the final report and presentation.
 
-So far Wesley has acquired the data sets from Davidson et al. and Ribeiro et al. and Analytics Vidhya and pre-processed them. He split the data set from Davidson et al. into a training set and test set and created the initial lexicon and network architecture \ref{fig:model ANN} and performed training on it. This model yielded a 75\% accuracy on the testing data.
+So far Wesley has acquired the data sets from Davidson et al., Ribeiro et al. and Analytics Vidhya and subsequently pre-processed them each. He split the data set from Davidson et al. into a training set and test set and created the initial lexicon and network architecture \ref{fig:model ANN} as well as performing necessary training on it. This model yielded a 75\% accuracy on the testing data.
 
 Mauricio improved upon the original model by adding a stemmer to stem the data and redesigning the model to have a network structure based on a 1-dimensional convolutional network block followed by an LSTM block. This model \ref{fig:model CNN LSTM} outperforms the first ANN architecture we have tested, currently providing around an 82\% accuracy on the testing data.
 
