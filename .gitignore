@@ -139,3 +139,6 @@ report.blg
 report.out
 report.pdf
 report.synctex.gz
+pyvenv.cfg
+discord-bot/bin
+token.txt
