@@ -17,6 +17,10 @@ python3 -m venv ${directory_name}
 cd ${directory_name}
 source ./bin/activate
 pip3 install discord.py
+pip3 install -U setuptools
+pip3 install tensorflow
+pip3 install keras
+pip3 install nltk
 unset directory_name
 
 echo "******************************************"

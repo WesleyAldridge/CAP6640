@@ -142,3 +142,4 @@ report.synctex.gz
 pyvenv.cfg
 discord-bot/bin
 token.txt
+hate_speech_model.h5
