@@ -21,6 +21,7 @@ pip3 install -U setuptools
 pip3 install tensorflow
 pip3 install keras
 pip3 install nltk
+pip3 install pandas
 unset directory_name
 
 echo "******************************************"

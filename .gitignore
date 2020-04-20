@@ -143,3 +143,5 @@ pyvenv.cfg
 discord-bot/bin
 token.txt
 hate_speech_model.h5
+network_tf.h5
+network_tf.json
