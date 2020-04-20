@@ -1,5 +1,5 @@
 import discord
-from classifier.hate_classifier_tf import hate_classifier
+from classifier.hate_classifier_tf_5050 import hate_classifier
 
 classifier = hate_classifier()
 haters = {};

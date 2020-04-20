@@ -145,3 +145,5 @@ token.txt
 hate_speech_model.h5
 network_tf.h5
 network_tf.json
+network_tf_5050.h5
+network_tf_5050.json
