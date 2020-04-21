@@ -6,11 +6,11 @@ import numpy as np
 MAX_WORDS = 16
 
 # Model reconstruction from JSON file
-with open('network_tf_5050_lstm.json', 'r') as f:
+with open('network_tf_lstm.json', 'r') as f:
     model = tf.keras.models.model_from_json(f.read())
 
 # Load weights into the new model
-model.load_weights('network_tf_5050_lstm.h5')
+model.load_weights('network_tf_lstm.h5')
 
 model.summary()
 
@@ -37,7 +37,7 @@ class hate_classifier:
     def encode(self, message):
         message = [remove_mentions(message)]
         x_seq = self.tk.texts_to_sequences(message)
-        return tf.keras.preprocessing.sequence.pad_sequences(x_seq, maxlen=MAX_WORDS)
+        return tf.keras.preprocessing.sequence.pad_sequences(x_seq, maxlen=MAX_WORDS, padding="post", truncating="post")
 
     def classify(self, encoding):
         result = model.predict(encoding)

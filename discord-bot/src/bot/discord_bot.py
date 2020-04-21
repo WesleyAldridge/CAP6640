@@ -4,7 +4,7 @@ from classifier.hate_classifier_tf_5050_lstm import hate_classifier
 classifier = hate_classifier()
 haters = {};
 
-threshold = 0.8
+threshold = 0.85
 
 class discord_bot(discord.Client):
 
