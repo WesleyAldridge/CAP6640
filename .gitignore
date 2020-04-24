@@ -127,9 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-proposal.aux
-proposal.bbl
-proposal.synctex.gz
-proposal.out
-proposal.blg
+**/*.aux
+**/*.bbl
+**/*.synctex.gz
+**/*.out
+**/*.blg
 .idea
+progress/*.pdf
+proposal/*.pdf
