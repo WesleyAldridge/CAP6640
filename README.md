@@ -2,7 +2,7 @@
 
 ### Discord chat bot to detect hate speech
 
-A hate speech detection bot for Discord. Uses an artificial neural network trained on Twitter tweets to detect hate speech. Python.
+A hate speech detection bot for Discord. Uses an artificial neural network trained on Twitter tweets to detect hate speech. Python. Tweet data from various sources; see [./data/](./data/).
  
 ## Proposal Document
 
