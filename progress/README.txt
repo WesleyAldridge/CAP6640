@@ -1,0 +1,1 @@
+This progress folder is merely a collection of files we needed for the class; there was an intermediary assignment between the proposal and the final report called the "progress report", and this folder here contains that intermediary submission.
