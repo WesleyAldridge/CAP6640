@@ -3,7 +3,8 @@
 ## Topic Proposal:
 
 ### CHAT BOT FOR DETECTING HATE SPEECH
-Our proposal is to build a chat bot to detect hate speech in an arbitrary chat setting.  Our intention is to leverage modern NLP techniques and publicly available reference text from various sources.
+
+A hate speech detection bot for Discord. Uses an artificial neural network trained on Twitter tweets to detect hate speech. Python.
  
 ## Proposal Document
 
