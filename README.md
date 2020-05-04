@@ -6,7 +6,7 @@ A hate speech detection bot for Discord. Uses an artificial neural network train
  
 ## Proposal Document
 
-- LaTeX and PDF on folder [./proposal/](./proposal/)
+- LaTeX and PDF documents in folder [./proposal/](./proposal/)
 
 ## Final Report:
 
