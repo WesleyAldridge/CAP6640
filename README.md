@@ -8,6 +8,10 @@ A hate speech detection bot for Discord. Uses an artificial neural network train
 
 - LaTeX and PDF on folder [./proposal/](./proposal/)
 
+## Final Report:
+
+- LaTeX document titled "main.tex" in [./report/](./report/)
+
 Useful links
 Here is the dataset from the paper if anyone wants to work on it: https://github.com/ZeerakW/hatespeech
 
