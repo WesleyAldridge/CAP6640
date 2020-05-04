@@ -1,8 +1,6 @@
 # CAP6640 Group project
 
-## Topic Proposal:
-
-### CHAT BOT FOR DETECTING HATE SPEECH
+### Discord chat bot to detect hate speech
 
 A hate speech detection bot for Discord. Uses an artificial neural network trained on Twitter tweets to detect hate speech. Python.
  
