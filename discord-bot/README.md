@@ -20,3 +20,9 @@ cp where_the_model_is/hate_speech_model.h5 .
 source bin/activate
 python3 src/main.py
 ```
+
+### References
+
+How to create a discord bot
+
+https://discordpy.readthedocs.io/en/latest/discord.html
