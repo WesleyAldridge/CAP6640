@@ -7,6 +7,10 @@ A hate speech detection bot for Discord. Uses an LSTM (Long Short-Term Memory Re
 
 
 ## Examples
+
+## The Dataset
+![The Dataset](./screenshots/example-data.png "The Dataset")
+
 ### Architecture
 ![The Neural Network Architecture](./screenshots/network.png "The Neural Network Architecture")
 
