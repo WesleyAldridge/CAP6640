@@ -8,7 +8,7 @@ A hate speech detection bot for Discord. Uses an LSTM (Long Short-Term Memory Re
 
 Which incorporates:
 - LSTM 
-- CuDNN
+- NVIDIA's CUDA Deep Neural Network library (cuDNN) for GPU acceleration
 - Batch Normalization
 - TensorFlow sequencer encoding
 - 25 epochs
