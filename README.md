@@ -6,10 +6,10 @@ A hate speech detection bot for Discord. Uses a Convolutional Neural Network (CN
 ### Architecture
 ![The Neural Network Architecture](./screenshots/network.png "The Neural Network Architecture")
 
-### Example Inputs
+### Example Inputs (hate speech words have been blurred)
 ![Example Inputs 1](./screenshots/example-2-censored.png "Example Inputs 1")
 
-## Differentiating between non-hate speech words pertaining to a group vs hate speech words pertaining to a group:
+## Differentiating between non-hate speech words pertaining to a group vs hate speech words pertaining to a group (with hate speech slur blurred):
 ![Example Inputs 2](./screenshots/example-1-censored.png "Example Inputs 2")
 
  
