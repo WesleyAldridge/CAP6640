@@ -6,16 +6,17 @@ A hate speech detection bot for Discord. Uses an LSTM (Long Short-Term Memory Re
 ### Architecture
 ![The Neural Network Architecture](./screenshots/network.png "The Neural Network Architecture")
 
--LSTM 
+Which incorporates:
+- LSTM 
 - CuDNN
 - Batch Normalization
-- tensorflow sequencer encoding
+- TensorFlow sequencer encoding
 - 25 epochs
-- batch size 128
-- 16 words
-- the 50-50 data set
-- right padding
-- 3 layer dense final
+- Batch size of 128
+- 16 word input length
+- The 50-50 composite data set
+- Right padding on the inputs
+- 3 densely-connected layers
 
 
 ### Example Inputs (hate speech words have been blurred)
