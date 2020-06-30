@@ -11,6 +11,17 @@ A hate speech detection bot for Discord. Uses an LSTM (Long Short-Term Memory Re
 ## The Dataset
 ![The Dataset](./screenshots/example-data.png "The Dataset")
 
+- Incorported the dataset from T-Davidson, et al., paper “Automated Hate Speech Detection and the Problem of Offensive Language” (2017) with some additions from the Analytics Vidhya (2018) data set and some hand-classified by us.
+
+- Data set was pre-processed to convert all text to lowercase, remove punctuation, and pad tweets. A stemmer was used to reduce words to their word stems.
+
+- Hate speech tweets were duplicated to create a data set closer to 50% hate-speech, 50% not-hate-speech tweets. Prior to doing this, the data set was very unbalanced in favor of not-hate-speech examples, and the network would guess not-hate-speech for nearly all test examples, even hate speech ones. Increasing the percentage of hate speech tweets to closer to 50% worked in getting the network to start predicting hate speech examples more accurately. Of course, duplicating examples is not ideal because it can lead to overfitting, however this was the best solution we could come up with given time constraints and a severe lack of good data to use. 
+
+- Tweets were labeled as hate speech only if they constituted actual hate speech; tweets that were merely offensive were not enough to be labeled as hate speech.
+
+- The network was evaluated based on its accuracy to classify input as hate speech or not hate speech.
+
+
 ### Architecture
 ![The Neural Network Architecture](./screenshots/network.png "The Neural Network Architecture")
 
