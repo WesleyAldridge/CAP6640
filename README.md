@@ -45,6 +45,17 @@ Which incorporates:
 ![Example Inputs 2](./screenshots/example-1-censored.png "Example Inputs 2")
 
 
+## Design Challenges:
+ - Differentiating between text that is hate speech and text that is merely offensive but not hate speech is quite a challenge, as there is a lot of overlap between the two and the differences are very subtle. They can share similar vocabulary.
+ 
+- Text that pertains to race or sex has a higher likelihood of being interpreted as racist/sexist even if it isn’t (false positives), as racist/sexist text shares a lot of the same vocabulary with text that merely pertains to race or sex but isn’t racist/sexist.
+
+- Some hate speech slurs are sometimes co-opted or reclaimed by members of the group to which the hate speech terms pertain, and these slurs are transformed into terms of endearment for fellow members of that in-group, sometimes with very slight spelling changes and other times with no spelling changes at all. Trying to get a classifier to predict when a slur is used as a term of endearment towards a member of an in-group or when it is used as hate speech is impossible, as the tweets contain little to no indication of who wrote the tweet or whom the tweet was written to.
+
+- The classifier trained on Tweets doesn’t transfer perfectly 1:1 to classifying Discord messages. Tweets are very short (around 200 characters or less), whereas Discord messages can be upwards of 2000 characters. Tweets also contain frequent @mentions to other twitter users as well as hashtags and emojis. These are all far less common in Discord messages, especially @mentions and hashtags.
+
+- Twitter is a public platform by default, whereas Discord is a private one. The language used in public Twitter tweets could be different from the langauge used in private Discord channels, as there is a large difference in anonymity between the two.
+
 
 ## Previous Architectural and Design Iterations:
 
@@ -57,20 +68,6 @@ Which incorporates:
 - 1, 2, 50, and 100 epochs
 
 We tried many different types of architecture: CNN, RNN, CNN with LSTM, a series of dense layers. We tried GloVe embeddings. We tried one-hot encoding vs a tokenizer.
-
-
-
-## Design Challenges:
- - Differentiating between text that is hate speech and text that is merely offensive but not hate speech is quite a challenge, as there is a lot of overlap between the two and the differences are very subtle. They can share similar vocabulary.
- 
-- Text that pertains to race or sex has a higher likelihood of being interpreted as racist/sexist even if it isn’t (false positives), as racist/sexist text shares a lot of the same vocabulary with text that merely pertains to race or sex but isn’t racist/sexist.
-
-- Some hate speech slurs are sometimes co-opted or reclaimed by members of the group to which the hate speech terms pertain, and these slurs are transformed into terms of endearment for fellow members of that in-group, sometimes with very slight spelling changes and other times with no spelling changes at all. Trying to get a classifier to predict when a slur is used as a term of endearment towards a member of an in-group or when it is used as hate speech is impossible, as the tweets contain little to no indication of who wrote the tweet or whom the tweet was written to.
-
-- The classifier trained on Tweets doesn’t transfer perfectly 1:1 to classifying Discord messages. Tweets are very short (around 200 characters or less), whereas Discord messages can be upwards of 2000 characters. Tweets also contain frequent @mentions to other twitter users as well as hashtags and emojis. These are all far less common in Discord messages, especially @mentions and hashtags.
-
-- Twitter is a public platform by default, whereas Discord is a private one. The language used in public Twitter messages could be different from the langauge used in private Discord channels, as there is a large difference in anonymity between the two.
-
 
  
 ## Proposal Document
