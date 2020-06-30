@@ -29,6 +29,18 @@ Which incorporates:
 ## Differentiating between non-hate speech words pertaining to a group vs hate speech words pertaining to a group (with hate speech slur blurred):
 ![Example Inputs 2](./screenshots/example-1-censored.png "Example Inputs 2")
 
+
+
+## Previous Architectural and Design Iterations:
+
+- Stanford GloVe word embeddings
+- CNN + LSTM
+- Series of deep layers (without CNN or LSTM)
+- 33 and 64 word inputs
+- Batch size of 32
+- Left side padding on tweets
+- 1, 2, 50, and 100 epochs
+
  
 ## Proposal Document
 
